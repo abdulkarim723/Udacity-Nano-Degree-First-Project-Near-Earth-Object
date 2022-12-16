@@ -12,7 +12,7 @@ data on NEOs and close approaches extracted by `extract.load_neos` and
 You'll edit this file in Tasks 2 and 3.
 """
 
-from collections import  defaultdict
+from collections import defaultdict
 
 
 class NEODatabase:
@@ -104,7 +104,7 @@ class NEODatabase:
             return neo_object[0]
         return None
 
-    def query(self, filters=()):
+    def query(self, filters={}):
         """Query close approaches to generate those that match a collection of filters.
 
         This generates a stream of `CloseApproach` objects that match all of the
@@ -118,6 +118,12 @@ class NEODatabase:
         :param filters: A collection of filters capturing user-specified criteria.
         :return: A stream of matching `CloseApproach` objects.
         """
-        # TODO: Generate `CloseApproach` objects that match all of the filters.
+
         for approach in self._approaches:
+            vals = []
+            for val in filters.values():
+                vals.append(val(approach))
+            if False in vals:
+                continue
             yield approach
+
