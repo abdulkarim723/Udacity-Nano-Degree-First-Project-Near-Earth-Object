@@ -42,23 +42,23 @@ class NEODatabase:
         :param neos: A collection of `NearEarthObject`s.
         :param approaches: A collection of `CloseApproach`es.
         """
-        # create dictionary of lists for neos
+        """create dictionary of lists for neos"""
         self._neos = neos
         self._approaches = approaches
 
-        # create dictionary of lists for neos
+        """create dictionary of lists for neos"""
         self._neos_dict = defaultdict(list)
         for _neo in neos:
             self._neos_dict[_neo.designation] = _neo
 
-        # create dictionary of lists for approaches
+        """create dictionary of lists for approaches"""
         self._approaches_dict = defaultdict(list)
         for approach in approaches:
-            # assign neos members in CloseApproach objects
+            """assign neos members in CloseApproach objects"""
             approach.neo = self._neos_dict[approach.designation]
-            # append all approaches for a unique neo designation
-            # as a result we become a dictionary of unique keys and a list for every key
-            # the size of list values can be one and can be more than 100!
+            """append all approaches for a unique neo designation
+            as a result we become a dictionary of unique keys and a list for every key
+            the size of list values can be one and can be more than 100!"""
             self._approaches_dict[approach.designation].append(approach)
 
         for key, value in self._neos_dict.items():
@@ -118,7 +118,6 @@ class NEODatabase:
         :param filters: A collection of filters capturing user-specified criteria.
         :return: A stream of matching `CloseApproach` objects.
         """
-
         for approach in self._approaches:
             vals = []
             for val in filters.values():

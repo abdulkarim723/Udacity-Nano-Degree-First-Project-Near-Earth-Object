@@ -32,6 +32,7 @@ class NearEarthObject:
     initialized to an empty collection, but eventually populated in the
     `NEODatabase` constructor.
     """
+
     def __init__(self, designation='{fullname}', name=None, diameter=float('nan'), hazardous='', approaches=[]):
         """Create a new `NearEarthObject`.
 
@@ -67,6 +68,7 @@ class NearEarthObject:
 
     @property
     def fullname(self):
+        """Get fullname method."""
         if not bool(self.name):
             return self.designation
         return self.designation + ' (' + self.name + ')'
@@ -95,6 +97,7 @@ class CloseApproach:
     private attribute, but the referenced NEO is eventually replaced in the
     `NEODatabase` constructor.
     """
+
     def __init__(self, designation='', time='', distance=float('nan'), velocity=float('nan'), neo=NearEarthObject()):
         """Create a new `CloseApproach`.
 
