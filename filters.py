@@ -200,13 +200,6 @@ def limit(iterator, n=None):
     :param n: The maximum number of values to produce.
     :yield: The first (at most) `n` values from the iterator.
     """
-    if n == 0 or n is None:
-        for val in iterator:
-            yield val
-
-    else:
-        try:
-            for line in itertools.islice(iterator, n):
-                yield line
-        except StopIteration:
-            print("end of iteration is reached!")
+    if n:
+        return itertools.islice(iterator, n)
+    return iterator
